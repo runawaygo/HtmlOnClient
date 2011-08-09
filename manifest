@@ -1,0 +1,20 @@
+#appname: EzDesk.Clients.DesktopClientX
+#appid: EzDesk.Clients.DesktopClientX
+#guid: 075de56b-e90b-40d8-b5ca-7f2f56359679
+#version: 1.0
+#image: default_app_logo.png
+#publisher: runaway
+#description: No description provided
+#url: http://www.cnsmith.com
+runtime: 1.1.0
+tiapp: 1.1.0
+tifilesystem: 1.1.0
+tiplatform: 1.1.0
+tiui: 1.1.0
+ticodec: 1.1.0
+tidatabase: 1.1.0
+timedia: 1.1.0
+timonkey: 1.1.0
+tinetwork: 1.1.0
+tiprocess: 1.1.0
+tiworker: 1.1.0

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        img
+        {
+            -webkit-transition: All 0.2s ease-out;
+            -moz-transition: All 0.2s ease-out;
+            -o-transition: All 0.2s ease-out;
+            cursor: pointer;
+        }
+        
+        .circle-btn-hover
+        {
+            -webkit-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px);
+            -moz-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px);
+            -o-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
+        }
+        
+        .background-show
+        {
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -o-transform: scale(1);
+            opacity:1;
+        }
+        
+        .background-hide
+        {
+            -webkit-transform: scale(0.6);
+            -moz-transform: scale(0.6);
+            -o-transform: scale(0.6);
+            opacity:0;
+        }
+        
+        .child
+        {}
+        
+        .child-click-animation {
+            -webkit-animation: cssAnimation 0.3s 1 ease-in;
+            -moz-animation: cssAnimation 0.3s 1 ease-in;
+            }
+            @-webkit-keyframes cssAnimation {
+            from { -webkit-transform: rotate(360deg) scale(1) skew(1deg) translate(0px); }
+            to { -webkit-transform: rotate(360deg) scale(1.2) skew(1deg) translate(0px); }
+            }
+            @-moz-keyframes cssAnimation {
+            from { -moz-transform: rotate(360deg) scale(1) skew(1deg) translate(0px); }
+            to { -moz-transform: rotate(360deg) scale(1.2) skew(1deg) translate(0px); }
+        }
+        
+        .child-hide
+        {
+            -webkit-transition: All 0.1s ease-in;
+            -moz-transition: All 0.1s ease-in;
+            -o-transition: All 0.1s ease-in;
+            -webkit-transform: rotate(0deg) scale(0.5) skew(1deg) translate(0px);
+            -moz-transform: rotate(0deg) scale(0.5) skew(1deg) translate(0px);
+            -o-transform: rotate(0deg) scale(0.5) skew(1deg) translate(0px);
+            opacity:0;
+        }
+        .child-show
+        {
+            -webkit-transition: All 0.2s ease-out;
+            -moz-transition: All 0.2s ease-out;
+            -o-transition: All 0.2s ease-out;
+            -webkit-transform: rotate(0deg) scale(1) skew(1deg) translate(0px);
+            -moz-transform: rotate(0deg) scale(1) skew(1deg) translate(0px);
+            -o-transform: rotate(0deg) scale(1) skew(1deg) translate(0px);
+            opacity:1;
+        }
+        
+        .child:hover
+        {
+            -webkit-transition: All 0.1s ease-out;
+            -moz-transition: All 0.1s ease-out;
+            -o-transition: All 0.1s ease-out;
+            -webkit-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px);
+            -moz-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px);
+            -o-transform: rotate(0deg) scale(1.2) skew(1deg) translate(0px); 
+        }
+        
+        #background-image
+        {
+            width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; z-index: -1;
+        }
+        #circle-btn
+        {
+            width: 64px; height: 64px;
+            margin: 64px; z-index: 100px;
+        }
+        #mainContainer
+        {
+            position: absolute; cursor: pointer; width: 192px;
+            height: 192px; right: 500px; top: 200px;
+        }
+    </style>
+    <script src="../../js/jquery-1.6.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery-ui-1.8.12.custom.min.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script>
+
+        var functionItems = [
+            { url: '/message/send', title: 'email', image: 'functionimages/email-icon.png' },
+            { url: '/project/addworkitem', title: 'task', image: 'functionimages/Misterwong-icon.png' },
+            { url: '/project/workitemlist', title: 'tasklist', image: 'functionimages/Simpy-icon.png' },
+            { url: '/attendance/DoCheckAttendance?attendanceTypeStr=onDuty&target=action', title: 'geton', image: 'functionimages/Msn-icon.png' },
+            { url: '/attendance/DoCheckAttendance?attendanceTypeStr=offDuty&target=action', title: 'getoff', image: 'functionimages/Aol-icon.png' },
+            { url: '/project/projectlist', title: 'project', image: 'functionimages/project-icon.png' },
+            ];
+
+        var flag = 0;
+
+        var mainRadius = 32;
+        var subRadius = 32;
+        var maxRadius = mainRadius + subRadius;
+        var startAngel = Math.PI * 2 * 5 / 8;
+        var addtionalAngel = Math.asin(subRadius / maxRadius) * 2;
+
+        var maxCount = Math.PI * 2 / addtionalAngel;
+        var functionContainerTemplate =
+            "<img class='child' title='{title}' style='width:40px;height:40px;' src='{image}' />";
+
+        function createMenuItem(functionData) {
+            var elementHTML = functionContainerTemplate
+                            .replace('{title}', functionData.title)
+                            .replace('{image}', functionData.image);
+            var $functionContainer = $(elementHTML);
+
+            $functionContainer.appendTo('#mainContainer')
+            .mousedown(function () {
+                $(this).addClass('child-click-animation');
+            }).mouseup(function () {
+                $(this).removeClass('child-click-animation');
+            })
+            .click(function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                console.log(functionData.title +"is clicked!");
+            });
+        }
+
+        function createCircleEffect() {
+            for (var i = 0; i < functionItems.length; i++) {
+                createMenuItem(functionItems[i]);
+            }
+
+            $('.child')
+            .each(function (i, item) {
+                var angle = startAngel + addtionalAngel * i;
+                var x = Math.sin(angle) * maxRadius;
+                var y = Math.cos(angle) * maxRadius;
+                $(item).position({ of: $('#mainContainer'), my: 'center center', at: 'center center', offset: x + ' ' + y });
+            });
+
+            $('#mainContainer')
+            .hover(function () {
+                $('#circle-btn').addClass('circle-btn-hover');
+                $('#background-image').removeClass('background-hide').addClass('background-show');
+                $('.child').removeClass('child-hide').addClass('child-show');
+                flag = 1;
+            }, function () {
+                hideChild();
+            });
+        }
+
+        function hideChild() {
+            flag = 0;
+            $('.child').removeClass('child-show').addClass('child-hide');
+            $('#background-image').removeClass('background-hide').addClass('background-hide');
+            setTimeout(function () {
+                if (flag == 0) {
+                    $('#circle-btn').removeClass('circle-btn-hover');
+                }
+            }, 300);
+        }
+
+        $(function () {
+            createCircleEffect();
+            hideChild();
+            $('#mainContainer').draggable();
+
+        });
+    </script>
+</head>
+<body style="position: absolute; overflow: hidden; width: 100%; height: 100%; margin: 0;">
+    <div id="mainContainer">
+        <img id="background-image" class="background-normal" src='functionimages/bg_bg.png' />
+        <img id="circle-btn" src='functionimages/minimain.2.png' />
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <guid>65e4c9cb-17d3-42a2-b589-1c9bb9e9bb1a</guid>
+    
+<id>EzDesk.Clients.DesktopClientX</id>
+<name>EzDesk.Clients.DesktopClientX</name>
+<version>1.0</version>
+<publisher>runaway</publisher>
+<url>http://www.cnsmith.com</url>
+<description>No description provided</description>
+<icon>default_app_logo.png</icon>
+<copyright>2011 by runaway</copyright>
+    
+    <window>
+        <id>initial</id>
+        <title>DeskTest</title>
+        <url>app://index.html</url>
+        <width>1000</width>
+        <max-width>3000</max-width>
+        <min-width>0</min-width>
+        <height>1000</height>
+        <max-height>0</max-height>
+        <min-height>0</min-height>
+        <fullscreen>true</fullscreen>
+        <resizable>false</resizable>
+        <chrome scrollbars="false">false</chrome>
+        <maximizable>true</maximizable>
+        <minimizable>true</minimizable>
+        <closeable>true</closeable>
+        <transparent-background>true</transparent-background>
+		<transparency>1</transparency>
+    </window>
+</ti:app>
