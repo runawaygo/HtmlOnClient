@@ -26,7 +26,7 @@
     <script src="js/jquery.jqDock.min.js" type="text/javascript"></script>
     <script src="js/jquery.ba-postmessage.js" type="text/javascript"></script>
     <script src="js/stackMenu.js" type="text/javascript"></script>
-    <script src="js/IIndexService.js"></script>
+    <script src="js/ClientService.js"></script>
     <script language="javascript">
         $(function () {
             $('#stack2').find('a').each(function (index, item) {
@@ -37,6 +37,8 @@
                         $('#i-container').src(url);
                 });
             });
+
+            var clientService = GetClientService();
         });
     </script>
 </head>
@@ -46,15 +48,9 @@
 		<ul id="stack2">
 			<li><a data-module="modules/circle/minimain.html"><span>Circle</span><img src="images/stacks/aperture.png" alt="Circle" /></a></li>
 			<li><a data-module="modules/taskboard/taskboard.html"><span>TaskBoard</span><img src="images/stacks/photoshop.png" alt="TaskBoard" /></a></li>
-
-			<!--<li><a href="example3.html"><span>Example&nbsp;3</span><img src="images/stacks/safari.png" alt="Safari" /></a></li>
-			<li><a href="example2.html"><span>Example&nbsp;2</span><img src="images/stacks/coda.png" alt="Coda" /></a></li>
-			<li><a href="index.html"><span>Example&nbsp;1</span><img src="images/stacks/finder.png" alt="Finder" /></a></li>			-->
 		</ul>
 	</div>
-
     <iframe id="i-container" class="i-full-screen" src=""></iframe>
-    
 </body>
 </html>
 

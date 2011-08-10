@@ -1,6 +1,8 @@
-﻿function GetIndexService() {
+﻿function GetClientService() {
     try {
         var currentWindow = Titanium.UI.getCurrentWindow();
+        desktopClient.setTopMost(true);
+        desktopClient.createTray();
         return desktopClient;
     }
     catch (exp) {
@@ -33,7 +35,6 @@ var desktopClient = {
     newWindow: function (url) {
         var desireRectangle = getDesireRectangle();
 
-        
         setTimeout(function(){
             try
             {
@@ -78,27 +79,22 @@ var desktopClient = {
     },
     createTray: function () { 
         _self = this;
-        setTimeout(function(){
-            try{
-                var tray = Titanium.UI.addTray('app://style/images/NotifyIcon.ico');
-                var menu = Titanium.UI.createMenu();
+        
+        var tray = Titanium.UI.addTray('app://head.png');
+        var menu = Titanium.UI.createMenu();
 
-                //menu.appendItem(Titanium.UI.createMenuItem('设置'));
-                menu.appendItem(Titanium.UI.createMenuItem('切换用户', function () { console.log('sign out'); $.postMessage('signout', '*', parent); } ));
-                menu.appendItem(Titanium.UI.createMenuItem('显示', function () { 
-                    _self.showCurrentWindow();
-                }));
-                menu.appendItem(Titanium.UI.createMenuItem('隐藏', function () { _self.hideCurrentWindow();}));
-                menu.appendItem(Titanium.UI.createMenuItem('退出', function () { Titanium.App.exit(); }));
+        menu.appendItem(Titanium.UI.createMenuItem('DoSomething', function () { console.log('DoSomething'); alert("DoSomething!"); $.postMessage('DoSomething', '*', parent); } ));
+        menu.appendItem(Titanium.UI.createMenuItem('置顶', function () { _self.setTopMost(true);}));
+        menu.appendItem(Titanium.UI.createMenuItem('不置顶', function () { _self.setTopMost(false);}));
+        menu.appendItem(Titanium.UI.createMenuItem('显示', function () { 
+            _self.showCurrentWindow();
+        }));
+        menu.appendItem(Titanium.UI.createMenuItem('隐藏', function () { _self.hideCurrentWindow();}));
+        menu.appendItem(Titanium.UI.createMenuItem('退出', function () { Titanium.App.exit(); }));
 
-
-                tray.setMenu(menu);
-                tray.setHint("易得桌面");
-                return tray;
-            }
-            catch(exp){alert(exp);}
-        },100);
-
+        tray.setMenu(menu);
+        tray.setHint("易得桌面");
+        return tray;
     },
     hideCurrentWindow: function()
     {
