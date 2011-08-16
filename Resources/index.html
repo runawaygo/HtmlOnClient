@@ -28,6 +28,9 @@
     <script src="js/stackMenu.js" type="text/javascript"></script>
     <script src="js/ClientService.js"></script>
     <script language="javascript">
+
+
+
         $(function () {
             $('#stack2').find('a').each(function (index, item) {
                 var $item = $(item);
@@ -39,6 +42,20 @@
             });
 
             var clientService = GetClientService();
+
+            $.receiveMessage(function (e) {
+                var paramKeyRegex = /\w*(?=\:)/g;
+                var key = paramKeyRegex.exec(e.data);
+                key = key ? key[0] : e.data;
+
+                if (key == 'url') {
+                    var url = e.data.substring(key.length + 1);
+                    clientService.newWindow(url);
+                }
+
+            });
+
+
         });
     </script>
 </head>

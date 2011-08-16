@@ -98,16 +98,16 @@
     </style>
     <script src="../../js/jquery-1.6.1.min.js" type="text/javascript"></script>
 	<script src="../../js/jquery-ui-1.8.12.custom.min.js" type="text/javascript" charset="utf-8"></script>
-    
+    <script src="../../js/jquery.ba-postmessage.js" type="text/javascript"></script>
     <script>
 
         var functionItems = [
-            { url: '/message/send', title: 'email', image: 'functionimages/email-icon.png' },
-            { url: '/project/addworkitem', title: 'task', image: 'functionimages/Misterwong-icon.png' },
-            { url: '/project/workitemlist', title: 'tasklist', image: 'functionimages/Simpy-icon.png' },
-            { url: '/attendance/DoCheckAttendance?attendanceTypeStr=onDuty&target=action', title: 'geton', image: 'functionimages/Msn-icon.png' },
-            { url: '/attendance/DoCheckAttendance?attendanceTypeStr=offDuty&target=action', title: 'getoff', image: 'functionimages/Aol-icon.png' },
-            { url: '/project/projectlist', title: 'project', image: 'functionimages/project-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/email-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/Misterwong-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/Simpy-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/Msn-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/Aol-icon.png' },
+            { url: 'http://www.g.cn', title: 'Google', image: 'functionimages/project-icon.png' },
             ];
 
         var flag = 0;
@@ -138,7 +138,8 @@
                 event.preventDefault();
                 event.stopPropagation();
 
-                console.log(functionData.title +"is clicked!");
+                $.postMessage("url:" + functionData.url, "*", parent);
+                console.log(functionData.title + "is clicked!");
             });
         }
 
